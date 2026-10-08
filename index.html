@@ -3,78 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data Entry App</title>
+<title>Sugam Pass for Advanced ITT</title>
 <style>
-  *{box-sizing:border-box}
-  body{font-family:Segoe UI,Arial,sans-serif;background:#f1f3f6;margin:0;padding:24px;color:#1b2430}
-  .wrap{max-width:820px;margin:0 auto}
-  h1{font-size:22px;margin:0 0 16px}
-  .card{background:#fff;border:1px solid #d9dde3;border-radius:8px;padding:16px 18px;margin-bottom:14px}
-  .card h2{font-size:14px;margin:0 0 10px;color:#2f5d9e;text-transform:uppercase;letter-spacing:.5px}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  label{display:block;font-size:12px;color:#556;margin-bottom:3px}
-  input,select{width:100%;padding:8px;border:1px solid #b9c0ca;border-radius:5px;font-size:14px}
-  input:focus,select:focus{outline:2px solid #2f5d9e44;border-color:#2f5d9e}
-  .bad{border-color:#c0392b!important;background:#fff5f4}
-  .actions{display:flex;gap:10px;align-items:center}
-  button{padding:10px 22px;font-size:15px;border:0;border-radius:6px;cursor:pointer}
-  .primary{background:#2f5d9e;color:#fff}
-  .ghost{background:#e3e7ee;color:#1b2430}
-  #msg{color:#c0392b;font-size:13px}
-  #slip{display:none}
-  .slip{background:#fff;border:1px solid #333;padding:22px 26px}
-  .slip h2{margin:0 0 4px;font-size:20px;text-align:center}
-  .slip .meta{display:flex;justify-content:space-between;font-size:13px;margin:10px 0 14px;border-top:2px solid #333;border-bottom:1px solid #999;padding:8px 0}
-  .slip .pid{font-weight:700;font-size:16px;letter-spacing:1px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{border:1px solid #555;padding:7px 9px;text-align:left}
-  th{background:#eceff4}
-  .foot{margin-top:40px;display:flex;justify-content:space-between;font-size:12px}
-  .foot div{border-top:1px solid #333;padding-top:4px;width:40%;text-align:center}
-  @media(max-width:640px){.grid{grid-template-columns:1fr 1fr}}
-  @media print{
-    body{background:#fff;padding:0}
-    #formView,h1{display:none!important}
-    #slip{display:block!important}
-    .slip{border:0}
-    .noprint{display:none!important}
-  }
+*{box-sizing:border-box}
+:root{
+  --primary:#075985;--primary2:#0e7490;--accent:#06b6d4;
+  --ink:#102a43;--muted:#52606d;--card:rgba(255,255,255,.94);
+}
+body{
+  font-family:Segoe UI,Arial,sans-serif;margin:0;padding:24px;color:var(--ink);
+  min-height:100vh;overflow-x:hidden;
+  background:linear-gradient(135deg,#e0f2fe,#f0fdfa 48%,#eef2ff);
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(circle at 10% 15%,rgba(6,182,212,.20),transparent 24%),
+    radial-gradient(circle at 90% 25%,rgba(59,130,246,.18),transparent 25%),
+    radial-gradient(circle at 50% 100%,rgba(14,116,144,.14),transparent 28%);
+}
+.tech-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.tech{
+  position:absolute;opacity:.16;filter:drop-shadow(0 5px 10px rgba(0,0,0,.12));
+  animation:float 7s ease-in-out infinite;
+}
+.tech.robot{font-size:64px;left:4%;top:14%}
+.tech.laptop{font-size:58px;right:7%;top:12%;animation-delay:1s}
+.tech.iot{font-size:62px;left:8%;bottom:14%;animation-delay:2s}
+.tech.cyber{font-size:65px;right:6%;bottom:12%;animation-delay:3s}
+.tech.code{font-size:42px;left:45%;top:6%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+.wrap{max-width:1000px;margin:0 auto}
+.hero{
+  color:#fff;border-radius:22px;padding:25px 28px;margin-bottom:18px;
+  background:linear-gradient(135deg,#075985,#0e7490,#164e63);
+  box-shadow:0 16px 35px rgba(8,47,73,.22);position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+  right:-40px;top:-80px;background:rgba(255,255,255,.10);
+}
+.hero h1{margin:0;font-size:29px;letter-spacing:.2px}
+.hero p{margin:7px 0 0;opacity:.88;font-size:14px}
+.card{
+  background:var(--card);backdrop-filter:blur(8px);border:1px solid rgba(148,163,184,.35);
+  border-radius:16px;padding:18px 20px;margin-bottom:14px;
+  box-shadow:0 8px 25px rgba(15,23,42,.08);
+}
+.card h2{font-size:14px;margin:0 0 13px;color:var(--primary);text-transform:uppercase;letter-spacing:.7px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;font-weight:600}
+input,select{
+  width:100%;padding:10px;border:1px solid #b8c4d0;border-radius:8px;
+  font-size:14px;background:#fff
+}
+input:focus,select:focus{outline:3px solid rgba(6,182,212,.18);border-color:var(--accent)}
+.bad{border-color:#c0392b!important;background:#fff5f4}
+.radio-group{display:flex;gap:14px;align-items:center;height:39px}
+.radio-group label{margin:0;color:var(--ink);font-size:14px;font-weight:500;display:flex;gap:5px;align-items:center}
+.radio-group input{width:auto}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button{padding:10px 20px;font-size:14px;font-weight:600;border:0;border-radius:9px;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(15,23,42,.14)}
+.primary{background:linear-gradient(135deg,#075985,#0891b2);color:#fff}
+.ghost{background:#e5e7eb;color:#1f2937}
+.secondary{background:#164e63;color:#fff}
+#msg{color:#c0392b;font-size:13px;font-weight:600}
+#slip,#dataView{display:none}
+.slip{background:#fff;border:1px solid #333;padding:22px 26px;border-radius:10px}
+.slip h2{margin:0 0 4px;font-size:20px;text-align:center}
+.slip .meta{display:flex;justify-content:space-between;font-size:13px;margin:10px 0 14px;border-top:2px solid #333;border-bottom:1px solid #999;padding:8px 0}
+.slip .pid{font-weight:700;font-size:16px;letter-spacing:1px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+th,td{border:1px solid #cbd5e1;padding:8px 9px;text-align:left}
+th{background:#e0f2fe;color:#164e63}
+.data-wrap{overflow:auto;border-radius:10px}
+.empty{padding:20px;text-align:center;color:#64748b}
+.badge{display:inline-block;padding:3px 8px;border-radius:20px;background:#e0f2fe;color:#075985;font-size:12px;font-weight:600}
+.foot{margin-top:40px;display:flex;justify-content:space-between;font-size:12px}
+.foot div{border-top:1px solid #333;padding-top:4px;width:40%;text-align:center}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){body{padding:12px}.grid{grid-template-columns:1fr}.hero h1{font-size:23px}.tech{opacity:.08}}
+@media print{
+ body{background:#fff;padding:0}.tech-bg,.hero,#formView,#dataView{display:none!important}
+ #slip{display:block!important}.slip{border:0;border-radius:0}.noprint{display:none!important}
+}
 </style>
 </head>
 <body>
+<div class="tech-bg" aria-hidden="true">
+  <div class="tech robot">🤖</div><div class="tech laptop">💻</div>
+  <div class="tech iot">🌐</div><div class="tech cyber">🔐</div><div class="tech code">⌨️</div>
+</div>
+
 <div class="wrap">
+  <div class="hero">
+    <h1>🚀 Sugam Pass for Advanced ITT</h1>
+    <p>Advanced Information Technology Training — Participant Registration</p>
+  </div>
+
   <div id="formView">
-    <h1>Data Entry</h1>
     <div id="rows"></div>
     <div class="actions">
-      <button class="primary" id="submitBtn">Submit &amp; Print</button>
+      <button class="primary" id="submitBtn">Submit</button>
       <button class="ghost" id="clearBtn">Clear</button>
+      <button class="secondary" id="viewDataBtn">View Saved Data</button>
       <span id="msg"></span>
     </div>
   </div>
 
   <div id="slip">
     <div class="slip">
-      <h2>Data Entry Record</h2>
+      <h2>Sugam Pass for Advanced ITT</h2>
       <div class="meta">
         <span>Print ID: <span class="pid" id="pPid"></span></span>
         <span id="pDate"></span>
       </div>
       <table>
-        <thead><tr><th>SL</th><th>Name</th><th>Age</th><th>Gender</th><th>ID</th></tr></thead>
+        <thead><tr><th>SL</th><th>Name</th><th>Age</th><th>Gender</th><th>SRO Number</th><th>Recliner Chair</th></tr></thead>
         <tbody id="pBody"></tbody>
       </table>
       <div class="foot"><div>Prepared by</div><div>Authorised signatory</div></div>
     </div>
     <div class="actions noprint" style="margin-top:14px">
-      <button class="primary" onclick="window.print()">Print again</button>
-      <button class="ghost" id="newBtn">New entry</button>
+      <button class="primary" onclick="window.print()">Print</button>
+      <button class="ghost" id="newBtn">New Entry</button>
+      <button class="secondary" id="slipDataBtn">View Saved Data</button>
+    </div>
+  </div>
+
+  <div id="dataView">
+    <div class="card">
+      <div class="actions" style="justify-content:space-between">
+        <div><h2 style="margin:0 0 4px">Saved Data</h2><span class="badge" id="recordCount">0 records</span></div>
+        <div class="actions">
+          <button class="ghost" id="backBtn">Back</button>
+          <button class="ghost" id="clearDataBtn">Clear Saved Data</button>
+        </div>
+      </div>
+    </div>
+    <div class="card data-wrap">
+      <table>
+        <thead>
+          <tr><th>Print ID</th><th>Date & Time</th><th>SL</th><th>Name</th><th>Age</th><th>Gender</th><th>SRO Number</th><th>Recliner Chair</th></tr>
+        </thead>
+        <tbody id="dataBody"></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <script>
-const N = 2;
+const N = 3;
 const rowsEl = document.getElementById('rows');
 
 for (let i = 1; i <= N; i++) {
@@ -85,15 +165,23 @@ for (let i = 1; i <= N; i++) {
       <div><label>Name</label><input type="text" id="name_${i}" class="f-name" maxlength="80"></div>
       <div><label>Age</label><input type="number" id="age_${i}" class="f-age" min="0" max="130"></div>
       <div><label>Gender</label>
-        <select id="gender_${i}" class="f-gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
-      <div><label>ID</label><input type="text" id="id_${i}" class="f-id" maxlength="40"></div>
+        <select id="gender_${i}" class="f-gender"><option value="Male">Male</option><option value="Female">Female</option></select>
+      </div>
+      <div><label>SRO Number</label><input type="text" id="id_${i}" class="f-id" maxlength="40"></div>
+      <div><label>Do you need Recliner Chair</label>
+        <div class="radio-group">
+          <label><input type="radio" name="recliner_${i}" value="Yes"> Yes</label>
+          <label><input type="radio" name="recliner_${i}" value="No"> No</label>
+        </div>
+      </div>
     </div>
   </div>`);
 }
 
-function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+}
 
-// Unique print ID: PR-YYYYMMDD-HHMMSS-<running no.>-<random>
 function makePrintId() {
   const d = new Date(), p = (n,l=2)=>String(n).padStart(l,'0');
   let seq = 1;
@@ -107,49 +195,99 @@ function makePrintId() {
 
 function collect() {
   const out = []; let ok = true, any = false;
-  document.querySelectorAll('.card').forEach(card => {
+  document.querySelectorAll('.card[data-i]').forEach(card => {
     const f = {
-      name: card.querySelector('.f-name'), age: card.querySelector('.f-age'),
-      gender: card.querySelector('.f-gender'), id: card.querySelector('.f-id')
+      name: card.querySelector('.f-name'),
+      age: card.querySelector('.f-age'),
+      gender: card.querySelector('.f-gender'),
+      id: card.querySelector('.f-id')
     };
+    const recliner = card.querySelector('input[name="recliner_'+card.dataset.i+'"]:checked');
     Object.values(f).forEach(e => e.classList.remove('bad'));
-    const v = {name:f.name.value.trim(), age:f.age.value.trim(), gender:f.gender.value, id:f.id.value.trim()};
-    const filled = Object.values(v).some(x => x !== '');
+    const v = {
+      name:f.name.value.trim(), age:f.age.value.trim(), gender:f.gender.value,
+      id:f.id.value.trim(), recliner:recliner ? recliner.value : ''
+    };
+    const filled = [v.name,v.age,v.id,v.recliner].some(x => x !== '');
     if (!filled) return;
     any = true;
     Object.keys(f).forEach(k => { if (!v[k]) { f[k].classList.add('bad'); ok = false; } });
-    out.push({sl: card.dataset.i, ...v});
+    if (!recliner) { card.querySelector('.radio-group').style.outline='2px solid #c0392b'; ok=false; }
+    else card.querySelector('.radio-group').style.outline='';
+    out.push({sl:card.dataset.i,...v});
   });
-  return {out, ok, any};
+  return {out,ok,any};
 }
 
-document.getElementById('submitBtn').onclick = () => {
-  const msg = document.getElementById('msg');
-  const {out, ok, any} = collect();
-  if (!any) { msg.textContent = 'Enter at least one record.'; return; }
-  if (!ok) { msg.textContent = 'Fill all four fields for each record you start.'; return; }
-  msg.textContent = '';
-  const pid = makePrintId();
-  document.getElementById('pPid').textContent = pid;
-  document.getElementById('pDate').textContent = new Date().toLocaleString();
-  document.getElementById('pBody').innerHTML = out.map(r =>
-    `<tr><td>${r.sl}</td><td>${esc(r.name)}</td><td>${esc(r.age)}</td><td>${esc(r.gender)}</td><td>${esc(r.id)}</td></tr>`).join('');
-  document.getElementById('formView').style.display = 'none';
-  document.getElementById('slip').style.display = 'block';
-  document.title = pid;
-  setTimeout(() => window.print(), 150);
+function saveRecords(pid,date,out){
+  let records=[];
+  try{records=JSON.parse(localStorage.getItem('sugamPassRecords')||'[]')}catch(e){}
+  out.forEach(r=>records.push({pid,date,...r}));
+  try{localStorage.setItem('sugamPassRecords',JSON.stringify(records))}catch(e){}
+}
+
+function renderData(){
+  let records=[];
+  try{records=JSON.parse(localStorage.getItem('sugamPassRecords')||'[]')}catch(e){}
+  const body=document.getElementById('dataBody');
+  document.getElementById('recordCount').textContent=records.length+' record'+(records.length===1?'':'s');
+  if(!records.length){body.innerHTML='<tr><td colspan="8" class="empty">No saved data available.</td></tr>';return}
+  body.innerHTML=records.map(r=>`<tr>
+    <td>${esc(r.pid)}</td><td>${esc(r.date)}</td><td>${esc(r.sl)}</td><td>${esc(r.name)}</td>
+    <td>${esc(r.age)}</td><td>${esc(r.gender)}</td><td>${esc(r.id)}</td><td>${esc(r.recliner)}</td>
+  </tr>`).join('');
+}
+
+function showData(){
+  document.getElementById('formView').style.display='none';
+  document.getElementById('slip').style.display='none';
+  document.getElementById('dataView').style.display='block';
+  renderData();
+}
+function showForm(){
+  document.getElementById('dataView').style.display='none';
+  document.getElementById('slip').style.display='none';
+  document.getElementById('formView').style.display='block';
+}
+
+document.getElementById('submitBtn').onclick=()=>{
+  const msg=document.getElementById('msg');
+  const {out,ok,any}=collect();
+  if(!any){msg.textContent='Enter at least one record.';return}
+  if(!ok){msg.textContent='Fill all fields, including Recliner Chair choice, for each record you start.';return}
+  msg.textContent='';
+  const pid=makePrintId(), date=new Date().toLocaleString();
+  saveRecords(pid,date,out);
+  document.getElementById('pPid').textContent=pid;
+  document.getElementById('pDate').textContent=date;
+  document.getElementById('pBody').innerHTML=out.map(r=>
+    `<tr><td>${esc(r.sl)}</td><td>${esc(r.name)}</td><td>${esc(r.age)}</td><td>${esc(r.gender)}</td><td>${esc(r.id)}</td><td>${esc(r.recliner)}</td></tr>`
+  ).join('');
+  document.getElementById('formView').style.display='none';
+  document.getElementById('slip').style.display='block';
+  document.title=pid;
 };
 
-document.getElementById('clearBtn').onclick = () => {
-  document.querySelectorAll('input,select').forEach(e => { e.value = ''; e.classList.remove('bad'); });
-  document.getElementById('msg').textContent = '';
+document.getElementById('clearBtn').onclick=()=>{
+  document.querySelectorAll('#formView input,#formView select').forEach(e=>{
+    if(e.type==='radio')e.checked=false;else e.value='';
+    e.classList.remove('bad');
+  });
+  document.querySelectorAll('.radio-group').forEach(e=>e.style.outline='');
+  document.getElementById('msg').textContent='';
 };
 
-document.getElementById('newBtn').onclick = () => {
-  document.getElementById('clearBtn').click();
-  document.getElementById('slip').style.display = 'none';
-  document.getElementById('formView').style.display = 'block';
-  document.title = 'Data Entry App';
+document.getElementById('newBtn').onclick=()=>{
+  document.getElementById('clearBtn').click();showForm();document.title='Sugam Pass for Advanced ITT';
+};
+document.getElementById('viewDataBtn').onclick=showData;
+document.getElementById('slipDataBtn').onclick=showData;
+document.getElementById('backBtn').onclick=showForm;
+
+document.getElementById('clearDataBtn').onclick=()=>{
+  if(confirm('Clear all saved data from this browser?')){
+    localStorage.removeItem('sugamPassRecords');renderData();
+  }
 };
 </script>
 </body>
